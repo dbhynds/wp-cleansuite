@@ -1,0 +1,67 @@
+/* Type Classes */
+
+.title {
+  line-height: 1.1;
+  margin-bottom: 0.125em;
+}
+.subtitle {
+  line-height: 1.2;
+  color: lighten(@textcolor, 30%);
+}
+.meta {
+  color: lighten(@textcolor, 30%);
+}
+.lesser {
+  color: lighten(@textcolor, 30%);
+  .font-size(12);
+}
+.caption {
+  color: lighten(@textcolor, 30%);
+  .font-size(10);
+  line-height: 1.25em;
+}
+.lead {
+  .font-size(18);
+}
+
+// Plain Lists
+.list-plain {
+  list-style: none;
+  padding-left: 0;
+}
+
+// horizontal definition lists
+.dl-horizontal {
+  dt {
+  float : left;
+  clear : left;
+  width : 20.25%;
+  text-align : right; }
+  
+  dd {
+  margin-left : 22.78%; } 
+}
+
+// blockquote
+.blockquote  { 
+  p,
+  .quote {
+    margin: 0 0 (@baselineheight/4);
+  }
+  .quote {
+    &:before {
+      content: '\201C';
+    }
+    &:after {
+      content: '\201D';
+    }
+  }
+  cite,
+  .attr {
+    display: block;
+    margin: 0;
+      &:before {
+      content:'\2013\00A0';
+    }
+  }
+}

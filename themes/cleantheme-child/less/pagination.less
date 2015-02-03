@@ -1,0 +1,46 @@
+.pagination {
+  .clearfix();
+  clear: both;
+  padding: (@baselineheight/2) 0;
+  > p {
+    float: left;
+    margin: 0;
+  }
+  > ul {
+    float: right;
+    margin: 0;
+    list-style: none;
+    > li {
+      display: inline;
+    }
+  }
+  .next, 
+  .prev {
+    width: 48%;
+  }
+  .next {
+    float: right;
+    margin-left: 1%;
+    text-align: right;
+  }
+  .prev {
+    float: left;
+    margin-right: 1%;
+  }
+}
+
+.listing-pagination {
+	/* Pagination on multiple entry listing pages only */
+	strong, a {
+  	display: inline-block;
+  	padding: 0.25em 0.75em;
+	}
+	a {
+  	margin: 0 2px;
+    &:hover,
+    &:active,
+    &:focus {
+    	text-decoration: none;
+    }
+	}
+}

@@ -1,0 +1,58 @@
+// Tai's Simple (Non-Grid-System) Columns
+
+/*
+
+Use for two- and three- column layouts.
+
+Here's how this works:
+
+1. Give your columns whatever class names you want, indicative of usage. 
+   For instance, .col-primary and .col-seconary; .col-major and .col-minor; 
+   .col-first and .col-second; whatever.
+2. Use the mixin on each column. Define the width using preset variables, 
+   or whatever percentages you want. Set the float and the margins.
+3. You can redefine everything at any breakpoint by using the mixin again.
+
+Tips:
+
+1. If columns are stacked (for small screen sizes, usually), the width 
+   should be set to auto and the float set to none.
+2. Two- and three- columns should be floated.
+3. There should be no side margins on the left and right edges of the
+   container. For instance, in two-column layouts, the left column should
+   only have a right margin, and the right column should only have a left
+   margin. In three column layouts, the same -- while the middle column
+   should have both a left and right column.
+4. Don't use the .container class in your selector. Selectors using this
+   mixin should be by themselves. Use a more specific class if you need.
+
+Example:
+
+  @media only screen and (min-width: 55em) {
+    .col-major {
+      .simple-column(@twothirds, right, @gutterwidth, 0);
+    }
+    .col-minor {
+      .simple-column(@onethird, left, 0, @gutterwidth);
+    }
+  }
+
+*/
+
+.simple-column(@width, @float, @margin-left, @margin-right) {
+  width: @width;
+  float: @float;
+  margin-left: @margin-left;
+  margin-right: @margin-right;
+}
+
+
+
+// A single, colo column -- do not use in conjunction with the .simple-column mixin
+.col-solo {
+  display: block;
+  float: none;
+  max-width: 40em;
+  margin-right: auto;
+  margin-left: auto;
+}

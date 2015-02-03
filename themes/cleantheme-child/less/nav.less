@@ -1,0 +1,125 @@
+/* Navigation */
+
+.nav {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav > .pull-right {
+  float: right;
+}
+
+.navbar {
+  overflow: visible;
+  margin-bottom: @basemargin;
+  color: @navbarText;
+  *position: relative;
+  *z-index: 2;
+}
+
+.navbar .nav {
+  position: relative;
+  left: 0;
+  display: block;
+  margin: 0;
+}
+
+.navbar .nav.pull-right {
+  float: right; // redeclare due to specificity
+  margin-right: 0; // remove margin on float right nav
+}
+
+// Links
+.navbar .nav > li > a {
+  float: none;
+  line-height: @navbarBaseLineHeight;
+  padding: 0 15px;
+  color: @navbarLinkColor;
+  text-decoration: none;
+  display: block;
+}
+
+// Hover
+.navbar .nav > li > a:focus,
+.navbar .nav > li > a:hover {
+  color: @navbarLinkColorHover;
+  text-decoration: none;
+  text-shadow: none;
+  background-color: @navbarLinkBackgroundHover;
+}
+
+// Active
+.navbar-inner .nav > li > a:active {
+
+}
+
+// Current nav items
+.navbar .nav > .current > a,
+.navbar .nav > .current > a:hover,
+.navbar .nav > .current > a:focus {
+  color: @navbarLinkColorCurrent;
+  text-decoration: none;
+  background-color: @navbarLinkBackgroundCurrent;
+}
+
+// Navbar search
+.navbar-search {
+  position: relative;
+  margin-bottom: 0;
+  input[type='text'],
+  input[type='search'] {
+    float: left;
+    margin-bottom: 0;
+    padding: 4px 27px 4px 14px;
+    border-radius: 30px;
+  }
+  button[type='submit'] {
+    float: left;
+    width: 25px;
+    height: 25px;
+    border: none;
+    background: none;
+    margin-left: -27px;
+    margin-top: 1px;
+    i {
+      text-indent: 0;
+    }
+    span {
+      display: block;
+      .hide-text();
+    }
+  }
+}
+
+
+// Breadcrumbs
+.breadcrumb {
+  .font-size(12);
+  color: lighten(@textcolor, 40%);
+}
+
+.breadcrumb li {
+  display: inline-block;
+  margin-left: 0.35em;
+}
+
+.breadcrumb li:after {
+  /* forward slashes */
+  /* content: '\2044'; */
+  /* 'greater than' signs */
+  content: '\003E';
+}
+
+.breadcrumb li:first-child {
+  margin-left: 0;
+}
+
+.breadcrumb li:last-child:after {
+  content: '';
+}
+
+.breadcrumb li a {
+  margin-right: 0.65em;
+}
+

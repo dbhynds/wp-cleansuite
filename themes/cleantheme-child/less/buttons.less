@@ -1,0 +1,246 @@
+
+
+/* Buttons =================================================== */
+
+.btn {
+	display : inline-block;
+	*display : inline;
+	*zoom : 1;
+	padding : 6px 11px 6px;
+	margin-bottom : 0;
+	font-family : @basefont;
+	.font-size(12);
+	font-weight : bold;
+	line-height : (@baselineheight*.75);
+	color : @buttoncolor;
+	text-align : center;
+	vertical-align : middle;
+	background-color : @buttonbackground;
+	border : @buttonborderwidth @buttonborderstyle @buttonbordercolor;
+	border-bottom-color : @buttonbottombordercolor;
+	border-radius: 0; /* to override inputs with .btn class */
+	cursor : pointer;
+	*margin-left : .3em;
+	.transition(background-color .1s linear);
+	
+	&:visited,
+	&:hover,
+	&:focus {
+	color : @buttoncolor;
+	text-decoration : none; }
+	
+	&:hover,
+	&:focus {
+	  background-position: 0 -15px;
+	}
+	
+	small {
+	font-weight: normal;
+	line-height: 1;
+	}
+
+}
+
+input[type="submit"].btn:hover {
+border-color : @buttonbordercolor; }
+
+.btn:first-child {
+*margin-left : 0; }
+
+// gradient background
+.btn-grad {
+  .greygrad();
+  .transition(background-position .1s linear);
+}
+
+// rounded corners
+.btn-rounded {
+  border-radius: 4px;
+}
+
+// disabled
+
+.btn-disabled {
+.opacity(.5); 
+cursor : default; }
+
+// error
+
+.btn-error {
+background-color: @errorcolor;
+border-color : darken(@errorcolor, 15%);
+border-bottom-color : darken(@errorcolor, 20%); 
+&.btn-grad {
+  .errorgrad();
+}
+}
+
+// info
+
+.btn-info {
+background-color: @infocolor;
+border-color : darken(@infocolor, 15%);
+border-bottom-color : darken(@infocolor, 20%); 
+color : darken(@infocolor, 50%);
+&:visited,
+&:hover,
+&:focus {
+color : @buttoncolor;
+}
+&.btn-grad {
+  .infograd();
+}
+}
+
+// inverse
+
+.btn-inverse {
+background-color: @inverscolor;
+border-color : darken(@inverscolor, 15%);
+border-bottom-color : darken(@inverscolor, 20%); 
+&:visited,
+&:hover,
+&:focus {
+color : @buttoncolor;
+}
+&.btn-grad {
+  .inversegrad();
+}
+}
+
+// primary
+
+.btn-primary {
+background-color: @primarycolor;
+border-color : darken(@primarycolor, 15%);
+border-bottom-color : darken(@primarycolor, 20%);
+&:visited,
+&:hover,
+&:focus {
+color : @buttoncolor;
+}
+&.btn-grad {
+  .primarygrad();
+}
+}
+
+// success
+
+.btn-success {
+background-color: @successcolor;
+border-color : darken(@successcolor, 15%);
+border-bottom-color : darken(@successcolor, 20%);
+&:visited,
+&:hover,
+&:focus {
+color : @buttoncolor;
+}
+&.btn-grad {
+  .successgrad();
+}
+}
+
+// warning
+
+.btn-warning {
+background-color: @warningcolor;
+border-color : darken(@warningcolor, 15%);
+border-bottom-color : darken(@warningcolor, 20%); 
+&:visited,
+&:hover,
+&:focus {
+color : @buttoncolor;
+}
+&.btn-flat {
+  .warninggrad();
+}
+
+}
+
+// sizes
+
+.btn-extlarge {
+padding : 11px 22px;
+.font-size(21);
+border-radius: 4px; }
+
+.btn.btn-large {
+*padding-top : 7px;
+*padding-bottom : 7px; }
+
+.btn-large {
+padding : 11px 22px;
+.font-size(14);
+line-height : normal;
+border-radius: 4px; }
+
+.btn-small {
+padding : 6px 10px;
+.font-size(11); 
+line-height : 16px; }
+
+.btn-mini {
+padding : 3px 5px;
+.font-size(11); 
+line-height : 14px; }
+
+.btn-group {
+position : relative;
+*zoom : 1;
+*margin-left : .3em;
+margin-bottom : @baseline; }
+
+.btn-group .btn {
+position : relative;
+float : left;
+margin-left : -1px;
+border-radius: 0; }
+
+.btn-group .btn:first-child {
+margin-left : 0;
+border-radius: 2px 0 2px 0; } 
+
+.btn-group .btn:last-child {
+border-radius: 0 2px 0 2px; }
+
+.btn-group .btn.large:first-child {
+margin-left : 0;
+border-radius: 4px 0 4px 0; }
+
+.btn-group .btn.large:last-child {
+border-radius: 0 4px 0 4px; }
+
+.btn-toolbar {
+clear : both;
+margin-top : @baselineheight / 2;
+margin-bottom : @baselineheight / 2; }
+
+.btn-toolbar .btn-group {
+display : inline-block;
+*display : inline;
+*zoom : 1; }
+
+// Block button
+// -------------------------
+
+.btn-block {
+  display: block;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+  .box-sizing(border-box);
+}
+
+// Vertically space out multiple block buttons
+.btn-block + .btn-block {
+  margin-top: 5px;
+}
+
+// Specificity overrides
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  &.btn-block {
+    width: 100%;
+  }
+}

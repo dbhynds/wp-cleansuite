@@ -1,0 +1,20 @@
+/* Media Object: Image/Video plus text */
+
+.media {
+  margin-bottom: @baselineheight;
+  .clearfix();
+}
+.media-img img {
+  display: inline-block;
+}
+
+@media only screen and (min-width: 30em) {
+  .media-img {
+    float: left;
+    margin-right: 2%;
+  }
+  .media-body {
+    float: left;
+    margin-left: 2%;
+  }
+}
