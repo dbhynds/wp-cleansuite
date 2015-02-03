@@ -21,7 +21,7 @@ This theme is intended to be hacked apart and overwritten depending on the needs
 *	Post formats
 *	Editor stylesheet
 
-Also included is Tai's LESS framework. Compile 'less/styles.less' to 'css/styles.css'. *Do not include any CSS in the theme's 'style.css' file, as it will not be included on the front end.
+Also included is Tai's LESS framework. Compile 'less/styles.less' to 'css/styles.css'. *Do not include any CSS in the theme's 'style.css' file, as it will not be included on the front end.*
 
 ## Plugins
 
