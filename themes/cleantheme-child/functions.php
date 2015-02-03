@@ -68,6 +68,7 @@ if ( ! isset( $content_width ) ) {
 
 if ( ! function_exists( 'cleantheme_setup' ) ) :
 function cleantheme_setup() {
+	global $ct;
 
 	// Add default posts and comments RSS feed links to head.
 	add_theme_support( 'automatic-feed-links' );
@@ -138,20 +139,27 @@ add_action( 'after_setup_theme', 'cleantheme_setup' );
  * @link https://codex.wordpress.org/Function_Reference/register_sidebar
  */
 function cleantheme_widgets_init() {
-	if ($ct->sidebars != false) {
-		foreach ($ct->sidebars as $handle => $overrideargs) {
-			// Set default $args
-			$args = $ct->sidebar_defaults;
-			// Override any specified defaults
-			if (is_array($overrideargs)){
-				$args['id'] = $handle;
-				foreach ($$overrideargs as $key => $value) {
-					$args[$key] = $value;
+	global $ct;
+	if ( ($sidebars = $ct->sidebars) != false ) {
+		if (is_array($sidebars)) {
+			foreach ($sidebars as $handle => $overrideargs) {
+				// Set default $args
+				$args = $ct->sidebar_defaults;
+				// Override any specified defaults
+				if (is_array($overrideargs)){
+					$args['id'] = $handle;
+					foreach ($overrideargs as $key => $value) {
+						$args[$key] = $value;
+					}
+				} else { // Or just override the ID
+					$args['id'] = $overrideargs;
 				}
-			} else { // Or just override the ID
-				$args['id'] = $overrideargs;
+				// Register that sucker!
+				register_sidebar( $args );
 			}
-			// Register that sucker!
+		} else {
+			$args = $ct->sidebar_defaults;
+			$args['id'] = $sidebars;
 			register_sidebar( $args );
 		}
 	}

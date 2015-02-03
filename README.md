@@ -6,7 +6,7 @@ WP Cleansuite is a suite of plugins and themes designed speed up the process of 
 
 ### CleanTheme
 
-This is the base theme that includes commonly-used functions employed regardless of the theme.
+This is the base theme that includes commonly-used functions employed regardless of the theme. It is strongly advised to not modify this theme.
 
 ### CleanTheme Child
 

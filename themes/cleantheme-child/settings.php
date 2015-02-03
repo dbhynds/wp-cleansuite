@@ -24,11 +24,12 @@ class ct {
 
 	var $menus = array( 'primary' => 'Main Menu' ); // Accepts false or array()
 
-	var $sidebars = array();
-		// Accepts false
-		// string (i.e. 'sidebar')
-		// or array_key with $args overriding the default i.e.
-		// 'sidebar' => array('name'=>__('Sidebar %d'))
+	var $sidebars = 'sidebar';
+		// Accepts:
+		// false
+		// string, i.e. 'sidebar'
+		// array of strings, i.e. array('sidebar1','sidebar2')
+		// or array_key with $args overriding $sidebar_defaults, i.e. 'sidebar' => array('name'=>'Sidebar')
 
 	var $sidebar_defaults = array(
 		'name' => 'Widget Area',
@@ -43,6 +44,6 @@ class ct {
 
 	var $post_formats = array(); // Accepts false or array('format')
 
-	var $editor_style = array(); // Accepts false, relative path (i.e 'css/styles.css'), or array() of paths
+	var $editor_style = false; // Accepts false, relative path (i.e 'css/styles.css'), or array() of paths
 }
 
