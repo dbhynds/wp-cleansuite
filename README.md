@@ -4,10 +4,17 @@ WP Cleansuite is a suite of plugins and themes designed speed up the process of 
 
 ## Table of Contents
 
+*	Installation
 *	Themes
 	*	CleanTheme
 	*	CleanTheme Child
 *	Plugin
+
+## Installation
+
+Clone this repository into the /wp-content/ folder of your WordPress site.
+
+Alternately, download a .zip of this repository and copy/paste the contents of the "plugins" and "themes" directories into their respective folders in /wp-content/.
 
 ## Themes
 
