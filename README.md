@@ -2,6 +2,13 @@
 
 WP Cleansuite is a suite of plugins and themes designed speed up the process of creating and deploying new WordPress sites.
 
+## Table of Contents
+
+*	Themes
+	*	CleanTheme
+	*	CleanTheme Child
+*	Plugin
+
 ## Themes
 
 ### CleanTheme
@@ -30,6 +37,7 @@ The following plugins are included by default:
 *	Advanced Custom Fields
 *	Advanced Custom Fields: Repeater Field
 *	Contact Form 7
+*	Google Analytics for WordPress
 *	P3 (Plugin Performance Profiler)
 *	WordPress Importer
 *	WP Migrate DB
