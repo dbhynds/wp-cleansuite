@@ -32,22 +32,38 @@ function ct_get_the_thumbnail() {
 	 * Arguments follow get_the_post_thumbnail( $post_id, $size, $attr );
 	 * http://codex.wordpress.org/Function_Reference/get_the_post_thumbnail
 	 *
-	 * One additional argument is $link (bool) which, if set will override the default is_single()
+	 * One additional argument is $showlink (bool) which, if set will override the default is_single()
 	 * get_the_post_thumbnail( $post_id, $size, $attr, $link );
 	 */
-	$args = func_get_args();
-	$args[0] = (count($args)) ? $args[0] : null;
-	$link = (count($args) == 4) ? array_pop($args) : (is_search() || is_archive());
-	if (has_post_thumbnail($args[0])) {
+
+	$funcargs = func_get_args();
+
+	$post_id = (isset($funcargs[0])) ? $funcargs[0] : get_the_id();
+	$size = (isset($funcargs[1])) ? $funcargs[1] : false;
+	$attr = (isset($funcargs[2])) ? $funcargs[2] : false;
+
+	$args = array( $post_id, $size, $attr );
+	$link = (isset($link)) ? $link : (is_search() || is_archive() || is_home());
+
+
+	if (has_post_thumbnail($post_id)) {
 		$return = '';
 		if ($link) {
-			$return = '<a href="'.get_permalink($args[0]).'">';
+			$return .= '<a href="'.get_permalink($post_id).'">';
+		}
+
+		if ($size && $attr) {
+			$return .= get_the_post_thumbnail($post_id,$size,$attr);
+		} elseif ($size) {
+			$return .= get_the_post_thumbnail($post_id,$size);
+		} elseif ($attr) {
+			$return .= get_the_post_thumbnail($post_id,'thumbnail',$attr);
+		} else {
+			$return .= get_the_post_thumbnail($post_id);
 		}
 		
-		$return = get_the_post_thumbnail($args);
-		
 		if ($link) {
-			$return = '</a>';
+			$return .= '</a>';
 		}
 
 		return $return;
@@ -56,9 +72,13 @@ function ct_get_the_thumbnail() {
 endif;
 if ( ! function_exists( 'ct_the_thumbnail' ) ) :
 function ct_the_thumbnail() {
-	// Echo ct_get_the_thumbnail()
 	$args = func_get_args();
-	echo ct_get_the_thumbnail($args);
+	
+	$size = (isset($args[0])) ? $args[0] : null;
+	$attr = (isset($args[1])) ? $args[1] : null;
+
+	// Echo ct_get_the_thumbnail()
+	echo ct_get_the_thumbnail(get_the_id(),$size,$attr);
 }
 endif;
 
