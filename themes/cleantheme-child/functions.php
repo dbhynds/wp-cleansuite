@@ -33,6 +33,7 @@
  * @since CleanThemeChild 0.1
  */
 require 'settings.php';
+require 'helpers.php';
 $ct = new ct();
 
 /**
@@ -66,99 +67,5 @@ add_action( 'init', 'cleantheme_init' );
 
 
 
-
-
-
-
-/**
- * Set the content width based on the theme's design and stylesheet.
- */
-if ( ! isset( $content_width ) ) {
-	$content_width = $ct->content_width;
-}
-
-if ( ! function_exists( 'cleantheme_setup' ) ) :
-function cleantheme_setup() {
-	global $ct;
-
-	// Add default posts and comments RSS feed links to head.
-	add_theme_support( 'automatic-feed-links' );
-
-	/*
-	 * Let WordPress manage the document title.
-	 * By adding theme support, we declare that this theme does not use a
-	 * hard-coded <title> tag in the document head, and expect WordPress to
-	 * provide it for us.
-	 */
-	add_theme_support( 'title-tag' );
-
-	add_theme_support( 'custom-header', $ct->logo );
-
-	/*
-	 * Enable support for Post Thumbnails on posts and pages.
-	 *
-	 * See: https://codex.wordpress.org/Function_Reference/add_theme_support#Post_Thumbnails
-	 */
-	if ($ct->thumbnail != false) {
-		add_theme_support( 'post-thumbnails' );
-		set_post_thumbnail_size(
-				$ct->thumbnail['w'],
-				$ct->thumbnail['h'],
-				$ct->thumbnail['crop']
-			);
-	}
-
-	// This theme uses wp_nav_menu() in two locations.
-	
-	if ($ct->menus != false) {
-		register_nav_menus( $ct->menus );
-	}
-
-	/*
-	 * Switch default core markup for search form, comment form, and comments
-	 * to output valid HTML5.
-	 */
-	add_theme_support( 'html5', array(
-		'search-form', 'comment-form', 'comment-list', 'gallery', 'caption'
-	) );
-
-	/*
-	 * Enable support for Post Formats.
-	 *
-	 * See: https://codex.wordpress.org/Post_Formats
-	 */
-	if ($ct->post_formats != false) {
-		add_theme_support( 'post-formats', $ct->post_formats );
-	}
-
-	/*
-	 * This theme styles the visual editor to resemble the theme style,
-	 * specifically font, colors, icons, and column width.
-	 */
-	if ($ct->editor_style != false) {
-		add_editor_style( $ct->editor_style );
-	}
-
-}
-endif; // twentyfifteen_setup
-add_action( 'after_setup_theme', 'cleantheme_setup' );
-
-function ct_switch_theme() {
-	global $ct;
-	ct_image_sizes($ct->image_sizes);
-}
-add_action( 'after_switch_theme', 'ct_switch_theme' );
-
-/**
- * Register widget areas.
- *
- * @since CleanThemeChild 0.1
- * @link https://codex.wordpress.org/Function_Reference/register_sidebar
- */
-function cleantheme_widgets_init() {
-	global $ct;
-	ct_register_sidebars($ct->sidebars);
-}
-add_action( 'widgets_init', 'cleantheme_widgets_init' );
 
 

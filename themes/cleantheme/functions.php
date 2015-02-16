@@ -151,13 +151,19 @@ function ct_get_field() {
 }
 endif;
 
+/**
+ * Register widget areas.
+ *
+ * @since CleanThemeChild 0.2
+ * @link https://codex.wordpress.org/Function_Reference/register_sidebar
+ */
 if ( ! function_exists( 'ct_register_sidebars' ) ) :
-function ct_register_sidebars($sidebars) {
+function ct_register_sidebars($sidebars,$defaults) {
 	if ( $sidebars != false ) {
 		if (is_array($sidebars)) {
 			foreach ($sidebars as $handle => $overrideargs) {
 				// Set default $args
-				$args = $ct->sidebar_defaults;
+				$args = $defaults;
 				// Override any specified defaults
 				if (is_array($overrideargs)){
 					$args['id'] = $handle;
@@ -171,7 +177,7 @@ function ct_register_sidebars($sidebars) {
 				register_sidebar( $args );
 			}
 		} else {
-			$args = $ct->sidebar_defaults;
+			$args = $defaults;
 			$args['id'] = $sidebars;
 			register_sidebar( $args );
 		}
@@ -179,6 +185,12 @@ function ct_register_sidebars($sidebars) {
 }
 endif;
 
+/**
+ * Setup image sizes.
+ *
+ * @since CleanThemeChild 0.2
+ * @link https://codex.wordpress.org/Function_Reference/add_image_size
+ */
 if ( ! function_exists('ct_image_sizes') ) :
 function ct_image_sizes($image_sizes) {
 	foreach ($image_sizes as $name => $args) {
