@@ -132,6 +132,12 @@ function cleantheme_setup() {
 endif; // twentyfifteen_setup
 add_action( 'after_setup_theme', 'cleantheme_setup' );
 
+function ct_switch_theme() {
+	global $ct;
+	ct_image_sizes($ct->image_sizes);
+}
+add_action( 'after_switch_theme', 'ct_switch_theme' );
+
 /**
  * Register widget areas.
  *
@@ -140,29 +146,7 @@ add_action( 'after_setup_theme', 'cleantheme_setup' );
  */
 function cleantheme_widgets_init() {
 	global $ct;
-	if ( ($sidebars = $ct->sidebars) != false ) {
-		if (is_array($sidebars)) {
-			foreach ($sidebars as $handle => $overrideargs) {
-				// Set default $args
-				$args = $ct->sidebar_defaults;
-				// Override any specified defaults
-				if (is_array($overrideargs)){
-					$args['id'] = $handle;
-					foreach ($overrideargs as $key => $value) {
-						$args[$key] = $value;
-					}
-				} else { // Or just override the ID
-					$args['id'] = $overrideargs;
-				}
-				// Register that sucker!
-				register_sidebar( $args );
-			}
-		} else {
-			$args = $ct->sidebar_defaults;
-			$args['id'] = $sidebars;
-			register_sidebar( $args );
-		}
-	}
+	ct_register_sidebars($ct->sidebars);
 }
 add_action( 'widgets_init', 'cleantheme_widgets_init' );
 

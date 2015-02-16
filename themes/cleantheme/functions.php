@@ -151,5 +151,55 @@ function ct_get_field() {
 }
 endif;
 
+if ( ! function_exists( 'ct_register_sidebars' ) ) :
+function ct_register_sidebars($sidebars) {
+	if ( $sidebars != false ) {
+		if (is_array($sidebars)) {
+			foreach ($sidebars as $handle => $overrideargs) {
+				// Set default $args
+				$args = $ct->sidebar_defaults;
+				// Override any specified defaults
+				if (is_array($overrideargs)){
+					$args['id'] = $handle;
+					foreach ($overrideargs as $key => $value) {
+						$args[$key] = $value;
+					}
+				} else { // Or just override the ID
+					$args['id'] = $overrideargs;
+				}
+				// Register that sucker!
+				register_sidebar( $args );
+			}
+		} else {
+			$args = $ct->sidebar_defaults;
+			$args['id'] = $sidebars;
+			register_sidebar( $args );
+		}
+	}
+}
+endif;
+
+if ( ! function_exists('ct_image_sizes') ) :
+function ct_image_sizes($image_sizes) {
+	foreach ($image_sizes as $name => $args) {
+		if ( get_option($name.'_size_w') ||
+			get_option($name.'_size_h') ||
+			get_option($name.'_crop') ) {
+				update_option($name.'_size_w',$args['w']);
+				update_option($name.'_size_h',$args['h']);
+				if (array_key_exists('crop', $args)) {
+					update_option($name.'_crop',$args['crop']);
+				}
+		} else {
+			if (array_key_exists('crop', $args)) {
+				add_image_size($name,$args['w'],$args['h'],$args['crop']);
+			} else {
+				add_image_size($name,$args['w'],$args['h']);
+			}
+		}
+	}
+}
+endif;
+
 
 
