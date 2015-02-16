@@ -28,6 +28,12 @@
 class ct extends ct_settings {
 
 	public function __construct() {
+
+		$this->sidebar_defaults['name'] = __($this->sidebar_defaults['name'],$this->ns);
+		foreach ($this->menus as $key => $val) {
+			$this->menus[$key] = __($val,$this->ns);
+		}
+		
 		/**
 		 * Set the content width based on the theme's design and stylesheet.
 		 */
