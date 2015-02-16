@@ -10,16 +10,28 @@
 class ct {
 	var $content_width = 660;
 
-	var $thumbnail = array( // Accepts false or array($args)
-		'w' => 150, // Width of thumbnail
-		'h' => 150, // Height of thumbnail
-		'crop' => true // Crop thumbnail
-	);
-
 	var $logo = array( // Set logo parameters
 		'width' => 150, // Width of logo
 		'height' => 150, // Height of logo
 		'flex-width' => true, // Flexible width?
+	);
+
+	var $thumbnail = true; // Use post thumbnails
+
+	var $image_sizes = array( // Accepts false or array( $name => $args )
+		'thumbnail' => array(
+			'w' => 150, // Width of thumbnail
+			'h' => 150, // Height of thumbnail
+			'crop' => true // Crop thumbnail (default: false)
+		),
+		'medium' => array(
+			'w' => 330,
+			'h' => 330,
+		),
+		'large' => array(
+			'w' => 660,
+			'h' => 660,
+		),
 	);
 
 	var $menus = array( 'primary' => 'Main Menu' ); // Accepts false or array()

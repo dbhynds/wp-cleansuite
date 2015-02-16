@@ -26,30 +26,6 @@
  */
 
 
-/**
- * Enqueue scripts and styles.
- *
- * @since CleanThemeChild 0.1
- */
-function cleantheme_scripts() {
-
-	// Load CleanThemeChild stylesheet
-	// wp_enqueue_style( 'cleantheme-child', get_stylesheet_uri() );
-
-	// Load CleanThemeChild 
-	wp_enqueue_style( 'cleantheme-style', get_stylesheet_directory_uri() . '/css/styles.css');
-
-	// Load the Internet Explorer specific stylesheet.
-	wp_enqueue_style( 'cleantheme-ie', get_stylesheet_directory_uri() . '/css/ie.css', array( 'cleantheme-style' ) );
-	wp_style_add_data( 'cleantheme-ie', 'conditional', 'lt IE 9' );
-
-	// Load CleanThemeChild scripts
-	wp_enqueue_script( 'cleantheme-script', get_stylesheet_directory_uri() . '/js/functions.js', array( 'jquery' ), false, true );
-	//wp_localize_script();
-}
-add_action( 'wp_enqueue_scripts', 'cleantheme_scripts' );
-
-
 
 /**
  * Get default settings.
@@ -58,6 +34,41 @@ add_action( 'wp_enqueue_scripts', 'cleantheme_scripts' );
  */
 require 'settings.php';
 $ct = new ct();
+
+/**
+ * Enqueue scripts and styles.
+ *
+ * @since CleanThemeChild 0.1
+ */
+function cleantheme_scripts() {
+	global $ct;
+
+	// Load CleanThemeChild stylesheet
+	// wp_enqueue_style( 'cleantheme-child', get_stylesheet_uri() );
+
+	// Load CleanThemeChild 
+	wp_enqueue_style( $ct->ns.'-style', get_stylesheet_directory_uri() . '/css/styles.css');
+
+	// Load the Internet Explorer specific stylesheet.
+	wp_enqueue_style( $ct->ns.'-ie', get_stylesheet_directory_uri() . '/css/ie.css', array( $ct->ns.'-style' ) );
+	wp_style_add_data( $ct->ns.'-ie', 'conditional', 'lt IE 9' );
+
+	// Load CleanThemeChild scripts
+	wp_enqueue_script( $ct->ns.'-script', get_stylesheet_directory_uri() . '/js/functions.js', array( 'jquery' ), false, true );
+	//wp_localize_script();
+}
+add_action( 'wp_enqueue_scripts', 'cleantheme_scripts' );
+
+function cleantheme_init() {
+	global $ct;
+}
+add_action( 'init', 'cleantheme_init' );
+
+
+
+
+
+
 
 /**
  * Set the content width based on the theme's design and stylesheet.
