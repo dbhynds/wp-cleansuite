@@ -139,7 +139,7 @@ function ct_get_field() {
 	// Return an empty array() instead of false if the field is empty, so that foreach() loops don't break
 	if (function_exists('get_field')) {
 		$args = func_get_args();
-		$results = get_field($args);
+		$results = get_field($args[0],$args[1],$args[3]);
 		if ($results === false) {
 			return array();
 		} else {
