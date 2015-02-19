@@ -39,10 +39,9 @@ function ct_get_the_thumbnail() {
 	$funcargs = func_get_args();
 
 	$post_id = (isset($funcargs[0])) ? $funcargs[0] : get_the_id();
-	$size = (isset($funcargs[1])) ? $funcargs[1] : false;
-	$attr = (isset($funcargs[2])) ? $funcargs[2] : false;
+	$size = (isset($funcargs[1])) ? $funcargs[1] : 'post-thumbnail';
+	$attr = (isset($funcargs[2])) ? $funcargs[2] : null;
 
-	$args = array( $post_id, $size, $attr );
 	$link = (isset($link)) ? $link : (is_search() || is_archive() || is_home());
 
 
@@ -52,15 +51,7 @@ function ct_get_the_thumbnail() {
 			$return .= '<a href="'.get_permalink($post_id).'">';
 		}
 
-		if ($size && $attr) {
-			$return .= get_the_post_thumbnail($post_id,$size,$attr);
-		} elseif ($size) {
-			$return .= get_the_post_thumbnail($post_id,$size);
-		} elseif ($attr) {
-			$return .= get_the_post_thumbnail($post_id,'thumbnail',$attr);
-		} else {
-			$return .= get_the_post_thumbnail($post_id);
-		}
+		$return .= get_the_post_thumbnail($post_id,$size,$attr);
 		
 		if ($link) {
 			$return .= '</a>';
@@ -70,6 +61,7 @@ function ct_get_the_thumbnail() {
 	}
 }
 endif;
+
 if ( ! function_exists( 'ct_the_thumbnail' ) ) :
 function ct_the_thumbnail() {
 	$args = func_get_args();
@@ -96,7 +88,6 @@ endif;
 if ( ! function_exists( 'ct_the_header_image' ) ) :
 function ct_the_header_image() {
 	// Echo ct_get_header_image()
-	$args = func_get_args();
 	echo ct_get_header_image($args);
 }
 endif;
@@ -116,11 +107,11 @@ function ct_get_link() {
 	 */
 
 	$args = func_get_args();
-	if (!count($args)) {
+	if (!isset($args[0])) {
 		return false;
 	}
 
-	$args[1] = (count($args) == 2) ? $args[1] : null;
+	$args[1] = (isset($args[1])) ? $args[1] : null;
 	$return = '<a href="'.get_permalink($args[1]).'">'.$args[0].'</a>';
 	return $return;
 }
@@ -139,7 +130,10 @@ function ct_get_field() {
 	// Return an empty array() instead of false if the field is empty, so that foreach() loops don't break
 	if (function_exists('get_field')) {
 		$args = func_get_args();
-		$results = get_field($args[0],$args[1],$args[3]);
+		$field_name = ($args[0]);
+		$post_id = ($args[1]) ? $args[1] : null;
+		$format_value = ($args[2]) ? $args[2] : null;
+		$results = get_field($field_name, $post_id, $format_value);
 		if ($results === false) {
 			return array();
 		} else {
