@@ -88,7 +88,7 @@ endif;
 if ( ! function_exists( 'ct_the_header_image' ) ) :
 function ct_the_header_image() {
 	// Echo ct_get_header_image()
-	echo ct_get_header_image($args);
+	echo ct_get_header_image();
 }
 endif;
 
@@ -130,10 +130,17 @@ function ct_get_field() {
 	// Return an empty array() instead of false if the field is empty, so that foreach() loops don't break
 	if (function_exists('get_field')) {
 		$args = func_get_args();
-		$field_name = ($args[0]);
-		$post_id = ($args[1]) ? $args[1] : null;
-		$format_value = ($args[2]) ? $args[2] : null;
-		$results = get_field($field_name, $post_id, $format_value);
+		$field_name = $args[0];
+		$post_id = (isset($args[1])) ? $args[1] : false;
+		$format_value = (isset($args[2])) ? $args[2] : false;
+		
+		if ($format_value) {
+			$results = get_field($field_name, $post_id, $format_value);
+		} elseif ($post_id) {
+			$results = get_field($field_name, $post_id);
+		} else {
+			$results = get_field($field_name);
+		}
 		if ($results === false) {
 			return array();
 		} else {
