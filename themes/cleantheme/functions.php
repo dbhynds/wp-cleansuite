@@ -27,7 +27,7 @@
 
 
 if ( ! function_exists( 'ct_get_the_thumbnail' ) ) :
-function ct_get_the_thumbnail() {
+function ct_get_the_thumbnail($post_id = null, $size = 'post-thumbnail', $attr = '', $link = null) {
 	/**
 	 * Arguments follow get_the_post_thumbnail( $post_id, $size, $attr );
 	 * http://codex.wordpress.org/Function_Reference/get_the_post_thumbnail
@@ -35,12 +35,6 @@ function ct_get_the_thumbnail() {
 	 * One additional argument is $showlink (bool) which, if set will override the default is_single()
 	 * get_the_post_thumbnail( $post_id, $size, $attr, $link );
 	 */
-
-	$funcargs = func_get_args();
-
-	$post_id = (isset($funcargs[0])) ? $funcargs[0] : get_the_id();
-	$size = (isset($funcargs[1])) ? $funcargs[1] : 'post-thumbnail';
-	$attr = (isset($funcargs[2])) ? $funcargs[2] : null;
 
 	$link = (isset($link)) ? $link : (is_search() || is_archive() || is_home());
 
@@ -50,9 +44,7 @@ function ct_get_the_thumbnail() {
 		if ($link) {
 			$return .= '<a href="'.get_permalink($post_id).'">';
 		}
-
 		$return .= get_the_post_thumbnail($post_id,$size,$attr);
-		
 		if ($link) {
 			$return .= '</a>';
 		}
@@ -63,14 +55,9 @@ function ct_get_the_thumbnail() {
 endif;
 
 if ( ! function_exists( 'ct_the_thumbnail' ) ) :
-function ct_the_thumbnail() {
-	$args = func_get_args();
-	
-	$size = (isset($args[0])) ? $args[0] : null;
-	$attr = (isset($args[1])) ? $args[1] : null;
-
+function ct_the_thumbnail($size = 'post-thumbnail', $attr = '', $link = null) {
 	// Echo ct_get_the_thumbnail()
-	echo ct_get_the_thumbnail(get_the_id(),$size,$attr);
+	echo ct_get_the_thumbnail(get_the_id(),$size,$attr,$link);
 }
 endif;
 
@@ -94,7 +81,7 @@ endif;
 
 
 if ( ! function_exists( 'ct_get_link' ) ) :
-function ct_get_link() {
+function ct_get_link($content, $id = null) {
 	/**
 	 * Returns a link with some internal content
 	 *
@@ -106,41 +93,25 @@ function ct_get_link() {
 	 * $id (optional) The integer ID for a post or page, or a post object. Default: The current post ID
 	 */
 
-	$args = func_get_args();
-	if (!isset($args[0])) {
-		return false;
-	}
-
-	$args[1] = (isset($args[1])) ? $args[1] : null;
-	$return = '<a href="'.get_permalink($args[1]).'">'.$args[0].'</a>';
+	
+	$return = '<a href="'.get_permalink($id).'">'.$content.'</a>';
 	return $return;
 }
 endif;
 if ( ! function_exists( 'ct_the_link' ) ) :
-function ct_the_link() {
+function ct_the_link($content) {
 	// Echo ct_get_link()
-	$args = func_get_args();
-	echo ct_get_link($args);
+	echo ct_get_link($content);
 }
 endif;
 
 
 if ( ! function_exists( 'ct_get_field' ) ) :
-function ct_get_field() {
+function ct_get_field($field_key, $post_id = false, $format_value = true) {
 	// Return an empty array() instead of false if the field is empty, so that foreach() loops don't break
 	if (function_exists('get_field')) {
-		$args = func_get_args();
-		$field_name = $args[0];
-		$post_id = (isset($args[1])) ? $args[1] : false;
-		$format_value = (isset($args[2])) ? $args[2] : false;
-		
-		if ($format_value) {
-			$results = get_field($field_name, $post_id, $format_value);
-		} elseif ($post_id) {
-			$results = get_field($field_name, $post_id);
-		} else {
-			$results = get_field($field_name);
-		}
+		$results = get_field($field_key, $post_id, $format_value);
+
 		if ($results === false) {
 			return array();
 		} else {
