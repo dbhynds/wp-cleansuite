@@ -7,7 +7,7 @@
  * @since CleanThemeChild 0.1
  */
 
-class ct {
+class ct_settings {
 	var $content_width = 660;
 
 	var $logo = array( // Set logo parameters
