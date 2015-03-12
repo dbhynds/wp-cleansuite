@@ -67,7 +67,7 @@ function ct_get_header_image() {
 	// Return the logo inside a link with alt, height and width attributes
 	$return = '';
 	$return .= '<a href="'.home_url().'" rel="home">';
-	$return .= '<img src="'.header_image().'" alt="'.get_bloginfo('name').'" height="'.get_custom_header()->height.'" width="'.get_custom_header()->width.'">';
+	$return .= '<img src="'.get_header_image().'" alt="'.get_bloginfo('name').'" height="'.get_custom_header()->height.'" width="'.get_custom_header()->width.'">';
 	$return .= '</a>';
 	return $return;
 }
